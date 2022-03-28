@@ -1,4 +1,5 @@
 import string
+import random
 def load_words(file_name):
     '''
     file_name (string): the name of the file containing 
@@ -52,5 +53,15 @@ class guess(object):
             return False
     def __str__(self):
         return self.guess[0] + ' ' + self.guess[1] + ' ' + self.guess[2] + ' ' + self.guess[3] + ' ' + self.guess[4]
+
+
+class wordle(object):
+    def __init__(self, guess):
+        self.guess = guess
+        self.valid_words = load_words(WORDLIST_FILENAME)
+        self.word = random.choice(self.valid_words)
+        
+    
+    
         
 guess = guess('loser')
