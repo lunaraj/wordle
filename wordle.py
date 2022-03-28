@@ -59,7 +59,12 @@ class wordle(object):
     def __init__(self, guess):
         self.guess = guess
         self.valid_words = load_words(WORDLIST_FILENAME)
-        self.word = random.choice(self.valid_words)
+    def chooseWord(self):
+        while True:
+            self.word = random.choice(self.valid_words)
+            if len(self.word) == 5:
+                break
+        print(self.word)
         
     
     
