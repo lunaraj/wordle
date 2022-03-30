@@ -41,9 +41,10 @@ def is_word(word_list, word):
     return word in word_list
 
 class guess(object):
-    def __init__(self, guess):
+    def __init__(self, guess, word):
         self.guess = guess
         self.valid_words = load_words(WORDLIST_FILENAME)
+        self.word = word
     def getGuess(self):
         return self.guess
     def isGuessValid(self):
@@ -53,14 +54,32 @@ class guess(object):
             return False
     def __str__(self):
         return self.guess[0] + ' ' + self.guess[1] + ' ' + self.guess[2] + ' ' + self.guess[3] + ' ' + self.guess[4]
+    def isGuessCorrectHelper(self, i):
+        if self.guess[i] == self.word[i]:
+            return 'green'
+        elif self.guess[i] in self.word:
+            return 'yellow'
+        else:
+            return 'gray'
+    
+    def isGuessCorrect(self):
+        mommy = guess(self.guess, self.word)
+        one = mommy.isGuessCorrectHelper(0)
+        two = mommy.isGuessCorrectHelper(1)
+        three = mommy.isGuessCorrectHelper(2)
+        four = mommy.isGuessCorrectHelper(3)
+        five = mommy.isGuessCorrectHelper(4)
+        return (one, two, three, four, five)
 
 
 class wordle(object):
-    def __init__(self, guess):
+    def __init__(self):
         self.valid_words = load_words(WORDLIST_FILENAME)
     def chooseWord(self):
         while True:
             self.word = random.choice(self.valid_words)
             if len(self.word) == 5:
                 break
-        
+        return self.word
+bozo = guess('steph', 'lebro')
+print(bozo.isGuessCorrect())
